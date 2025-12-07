@@ -6,16 +6,317 @@
 
     <!-- Bootstrap CSS baðlantýsý -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <!-- Bootstrap Icons baðlantýsý (Next / Prev butonlarý için gerekli) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+
+    <style>
+        /* ============================================
+           GALERÝ GENEL STYLE' LARIN BULUNDUÐU KISIM
+           ============================================ */
+
+        /* Fotoðraflarýn temel görünümü */
+        .gallery-img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover; /* Fotoðrafý kýrpmadan kutuya sýðdýrýr */
+            cursor: pointer;
+            border-radius: 10px;
+            transition: transform .3s; /* Hover animasyonu */
+        }
+
+        /* Hover olduðunda fotoðraf biraz büyür ve koyulaþýr */
+        .gallery-box:hover .gallery-img {
+            transform: scale(1.08);
+            filter: brightness(70%);
+        }
+
+        /* Fotoðraflarýn kapsayýcý kutusu */
+        .gallery-box {
+            position: relative;
+            overflow: hidden; /* Taþan yerler görünmesin */
+            border-radius: 10px;
+        }
+
+
+
+        /* ============================================
+           FOTO ÜSTÜNDEYKEN AÇIKLAMA(CSS)
+           ============================================ */
+
+        .img-caption {
+            position: absolute;
+            bottom: 10px;
+            left: 12px;
+            right: 12px;
+            padding: 6px 10px;
+            font-size: 1rem;
+            color: white;
+            /* Silik beyaz arka plan efekti */
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(2px);
+            border-radius: 6px;
+            opacity: 0; /* Baþta görünmez */
+            transform: translateY(10px); /* Hafif aþaðý kayýk baþlar */
+
+            transition: all .3s ease;
+        }
+
+        /* Hover ile yazýyý görünür yap */
+        .gallery-box:hover .img-caption {
+            opacity: 1;
+            transform: translateY(0); /* Yukarý kayar */
+        }
+    </style>
 </head>
+
+
+
+
 <body class="bg-light">
 
-    <div class="container py-5">
-        <h2 class="text-center mb-4">Resim Galerisi Projesi</h2>
-        <p class="text-center">Bu proje Bootstrap kullanilarak resim galerisi olusturmak icindir.</p>
+    <!-- ============================================
+         SAYFA ÜSTÜ KISMI(GÜZEL GÖRÜNÜM)
+         ============================================ -->
+    <header style="
+        background-color: darkcyan;
+        height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        text-shadow: 0 2px 8px rgba(0,0,0,0.7);
+    ">
+        <div class="text-center">
+            <h1 class="fw-bold">Resim Galerisi Projesi</h1>
+            <p class="lead">Bootstrap ile modern ve interaktif bir fotograf deneyimi</p>
+
+            <!-- Alttaki yazýnýn silik görünmesi için opacity ve açýk renk -->
+            <p class="text-center" style="color:rgba(255,255,255,0.15); opacity:0.9;">
+                Bu proje, Siliconmade Academy kursunda verilen ödev kapsamýnda hazýrlanmýþtýr.
+            </p>
+        </div>
+    </header>
+
+
+
+
+    <!-- ============================================
+         FOTOÐRAFLARIN BULUNDUÐU DÝV
+         ============================================ -->
+    <div class="container py-5"> <!--ÜSTTEN VE ALTTAN BOÞLUK VERECEK -- PADDÝNG-Y:5-->
+
+        <div class="row g-4"> <!--ROW-- KOLONNLARI YATYADA YAN YANA DÝZER VE G -4 BÝRÝM BOÞLUK-->
+
+            <!-- 1. Fotoðraf -->
+            <div class="col-md-4">
+                <!--Orta ve büyük ekranlarda 12’lik grid sisteminin 4 birimini kapla-->
+                <div class="gallery-box">
+                    <!--FOTOPRAFI VE ÜZERÝNE GELECEK OLAN AÇIKLAMA YAZISINI TAÞIYAN KUTU-->
+                    <img src="https://picsum.photos/id/1015/600/400"
+                         class="gallery-img"
+                         data-bs-toggle="modal"
+                         data-bs-target="#imageModal"
+                         onclick="openModal(this.src)" />
+                    <div class="img-caption">Dað Manzarasý</div>
+                </div>
+            </div>
+
+            <!-- 2. Fotoðraf -->
+            <div class="col-md-4">
+                <div class="gallery-box">
+                    <img src="https://picsum.photos/id/1016/600/400"
+                         class="gallery-img"
+                         data-bs-toggle="modal"
+                         data-bs-target="#imageModal"
+                         onclick="openModal(this.src)" />
+                    <div class="img-caption">Çöl Manzarasý</div>
+                </div>
+            </div>
+
+            <!-- 3. Fotoðraf -->
+            <div class="col-md-4">
+                <div class="gallery-box">
+                    <img src="https://picsum.photos/id/1021/600/400"
+                         class="gallery-img"
+                         data-bs-toggle="modal"
+                         data-bs-target="#imageModal"
+                         onclick="openModal(this.src)" />
+                    <div class="img-caption">Sisli Dað Manzarasý</div>
+                </div>
+            </div>
+
+            <!-- 4. Fotoðraf -->
+            <div class="col-md-4">
+                <div class="gallery-box">
+                    <img src="https://picsum.photos/id/1018/600/400"
+                         class="gallery-img"
+                         data-bs-toggle="modal"
+                         data-bs-target="#imageModal"
+                         onclick="openModal(this.src)" />
+                    <div class="img-caption">Yeþillik ve Uçurum</div>
+                </div>
+            </div>
+
+            <!-- 5. Fotoðraf -->
+            <div class="col-md-4">
+                <div class="gallery-box">
+                    <img src="https://picsum.photos/id/1019/600/400"
+                         class="gallery-img"
+                         data-bs-toggle="modal"
+                         data-bs-target="#imageModal"
+                         onclick="openModal(this.src)" />
+                    <div class="img-caption">Deniz Manzarasý</div>
+                </div>
+            </div>
+
+            <!-- 6. Fotoðraf -->
+            <div class="col-md-4">
+                <div class="gallery-box">
+                    <img src="https://picsum.photos/id/1020/600/400"
+                         class="gallery-img"
+                         data-bs-toggle="modal"
+                         data-bs-target="#imageModal"
+                         onclick="openModal(this.src)" />
+                    <div class="img-caption">Ayý Fotoðrafý</div>
+                </div>
+            </div>
+
+            <!-- 7. Fotoðraf -->
+            <div class="col-md-4">
+                <div class="gallery-box">
+                    <img src="https://picsum.photos/id/1028/600/400"
+                         class="gallery-img"
+                         data-bs-toggle="modal"
+                         data-bs-target="#imageModal"
+                         onclick="openModal(this.src)" />
+                    <div class="img-caption">Orman Yolu</div>
+                </div>
+            </div>
+
+        </div>
     </div>
 
-    <!-- Bootstrap JS baðlantýsý -->
+
+
+
+
+    <!-- ============================================
+         MODAL KISMI (FOTOÐRAF BÜYÜTME + NEXT / PREV BUTONLARI)
+         ============================================ -->
+    <div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content position-relative">
+
+                <!-- Modal içinde görüntülenen büyük fotoðraf -->
+                <div class="modal-body p-0">
+                    <img id="modalImage" class="w-100" src="" alt="">
+                </div>
+
+                <!-- Önceki fotoðraf butonu -->
+                <button class="btn btn-dark position-absolute top-50 start-0 translate-middle-y ms-2"
+                        onclick="prevImage()">
+                    <i class="bi bi-chevron-left fs-2"></i>
+                </button>
+
+                <!-- Sonraki fotoðraf butonu -->
+                <button class="btn btn-dark position-absolute top-50 end-0 translate-middle-y me-2"
+                        onclick="nextImage()">
+                    <i class="bi bi-chevron-right fs-2"></i>
+                </button>
+
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- ============================================
+         JAVASCRIPT KODLARI
+         ============================================ -->
+    <!-- Bootstrap JS dosyasý -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <script>
+        /*
+           openModal()
+           =============
+           Kullanýcý fotoðraflardan birine týkladýðýnda tetiklenir.
+           Hangi fotoðrafa týklandýysa o fotoðrafýn src bilgisini alýr
+           ve modal içinde görüntülenmesini saðlar.
+        */
+        function openModal(src) {
+            document.getElementById("modalImage").src = src;
+        }
+    </script>
+
+
+    <script>
+
+        /*
+           images dizisi:
+           Tüm fotoðraflarýn sýrasýný burada tutuyoruz.
+           Böylece Next / Prev butonlarý bu dizide gezinerek çalýþýyor.
+        */
+        const images = [
+            "https://picsum.photos/id/1015/600/400",
+            "https://picsum.photos/id/1016/600/400",
+            "https://picsum.photos/id/1021/600/400",
+            "https://picsum.photos/id/1018/600/400",
+            "https://picsum.photos/id/1019/600/400",
+            "https://picsum.photos/id/1020/600/400",
+            "https://picsum.photos/id/1028/600/400"
+        ];
+
+        /* Hangi fotoðrafýn açýk olduðunu takip eden index */
+        let currentIndex = 0;
+
+
+        /*
+           openModal()
+           -------------
+           Týklanan fotoðrafý modal içine aktarýr
+           VE dizide o fotoðraf kaçýncý sýradaysa bulur.
+           Böylece ileri/geri iþlemleri doðru çalýþýr.
+        */
+        function openModal(src) {
+            currentIndex = images.indexOf(src);
+            document.getElementById("modalImage").src = src;
+        }
+
+
+        /*
+           nextImage()
+           -------------
+           Bir sonraki fotoðrafa geçer.
+           Dizinin sonuna gelince baþa döner (sonsuz döngü).
+        */
+        function nextImage() {
+            currentIndex = (currentIndex + 1) % images.length;
+            document.getElementById("modalImage").src = images[currentIndex];
+        }
+
+
+        /*
+           prevImage()
+           -------------
+           Bir önceki fotoðrafa döner.
+           0. fotoðraftaysa dizinin sonuna gider (geri döngü).
+        */
+        function prevImage() {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            document.getElementById("modalImage").src = images[currentIndex];
+        }
+
+    </script>
 
 </body>
 </html>
