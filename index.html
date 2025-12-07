@@ -4,46 +4,46 @@
     <meta charset="UTF-8">
     <title>Resim Galerisi</title>
 
-    <!-- Bootstrap CSS ba�lant�s� -->
+    <!-- Bootstrap CSS baglantisi -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
 
-    <!-- Bootstrap Icons ba�lant�s� (Next / Prev butonlar� i�in gerekli) -->
+    <!-- Bootstrap Icons baglantisi (Next / Prev butonlar� i�in gerekli) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
 
     <style>
         /* ============================================
-           GALER� GENEL STYLE' LARIN BULUNDU�U KISIM
+           GALERI GENEL STYLE' LARIN BULUNDUGU KISIM
            ============================================ */
 
-        /* Foto�raflar�n temel g�r�n�m� */
+        /* Fotograflarin temel gorunumu */
         .gallery-img {
             width: 100%;
             height: 240px;
-            object-fit: cover; /* Foto�raf� k�rpmadan kutuya s��d�r�r */
+            object-fit: cover; /* Fotografi kırpmadan kutuya sigdirir */
             cursor: pointer;
             border-radius: 10px;
             transition: transform .3s; /* Hover animasyonu */
         }
 
-        /* Hover oldu�unda foto�raf biraz b�y�r ve koyula��r */
+        /* Hover oldugunda fotograf biraz buyur ve koyulasir */
         .gallery-box:hover .gallery-img {
             transform: scale(1.08);
             filter: brightness(70%);
         }
 
-        /* Foto�raflar�n kapsay�c� kutusu */
+        /* Fotograflarin kapsayici kutusu */
         .gallery-box {
             position: relative;
-            overflow: hidden; /* Ta�an yerler g�r�nmesin */
+            overflow: hidden; /* Tasan yerler gorunmesin */
             border-radius: 10px;
         }
 
 
 
         /* ============================================
-           FOTO �ST�NDEYKEN A�IKLAMA(CSS)
+           FOTO USTUNDEYKEN ACIKLAMA(CSS)
            ============================================ */
 
         .img-caption {
@@ -58,17 +58,58 @@
             background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(2px);
             border-radius: 6px;
-            opacity: 0; /* Ba�ta g�r�nmez */
-            transform: translateY(10px); /* Hafif a�a�� kay�k ba�lar */
+            opacity: 0; /* Basta gorunmez */
+            transform: translateY(10px); 
 
             transition: all .3s ease;
         }
 
-        /* Hover ile yaz�y� g�r�n�r yap */
+        /* Hover ile yaziyi gorunur yap */
         .gallery-box:hover .img-caption {
             opacity: 1;
-            transform: translateY(0); /* Yukar� kayar */
+            transform: translateY(0); /* Yukari kayar */
         }
+
+
+
+        /*SCROLLBAR ICIN YAZDIGIM CSS*/
+        /* Fotoğrafların olduğu scrollable alan */
+        .photo-scroll-wrapper {
+            width: 80%; /* Ortada durması için genişlik */
+            margin: 0 auto; /* Ortala */
+            height: 600px; /* Header + footer arasında görünme yüksekliği */
+            overflow-y: auto; /* Scroll SADECE burada */
+            padding-right: 10px; /* Scroll içeriği kapatmasın */
+        }
+
+        /* Scrollbar tasarımı */
+        .photo-scroll-wrapper::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        .photo-scroll-wrapper::-webkit-scrollbar-track {
+            background: #e2f4f4;
+            border-radius: 10px;
+        }
+
+        .photo-scroll-wrapper::-webkit-scrollbar-thumb {
+            background: darkcyan;
+            border-radius: 10px;
+        }
+
+        .photo-scroll-wrapper::-webkit-scrollbar-thumb:hover {
+            background: #008b8b;
+        }
+
+
+
+
+
+            .photo-scroll-wrapper .row {
+                padding-top: 38px; /* Burayı istediğin kadar artırabilirsin */
+            }
+
+            
     </style>
 </head>
 
@@ -78,7 +119,7 @@
 <body class="bg-light">
 
     <!-- ============================================
-         SAYFA �ST� KISMI(G�ZEL G�R�N�M)
+         SAYFA UST KISMI(GUZEL GORUNUM)
          ============================================ -->
     <header style="
         background-color: darkcyan;
@@ -93,7 +134,6 @@
             <h1 class="fw-bold">Resim Galerisi Projesi</h1>
             <p class="lead">Bootstrap ile modern ve interaktif bir fotograf deneyimi</p>
 
-            <!-- Alttaki yaz�n�n silik g�r�nmesi i�in opacity ve a��k renk -->
             <p class="text-center" style="color:rgba(255,255,255,0.15); opacity:0.9;">
                 Bu proje, Siliconmade Academy kursunda verilen odev kapsaminda hazirlanmistir.
             </p>
@@ -104,144 +144,205 @@
 
 
     <!-- ============================================
-         FOTO�RAFLARIN BULUNDU�U D�V
+         FOTOGRAFLARIN BULUNDUGU DIV
          ============================================ -->
-    <div class="container py-5">
-        <!--�STTEN VE ALTTAN BO�LUK VERECEK -- PADD�NG-Y:5-->
+    <div class="photo-scroll-wrapper">
+        <div class="container py-5">
+            <!--USTTEN VE ALTTAN BOSLUK VERECEK -- PADDING-Y:5-->
 
-        <div class="row g-4">
-            <!--ROW-- KOLONNLARI YATYADA YAN YANA D�ZER VE G -4 B�R�M BO�LUK-->
-            <!-- 1. Foto�raf -->
-            <div class="col-md-4">
-                <!--Orta ve b�y�k ekranlarda 12�lik grid sisteminin 4 birimini kapla-->
-                <div class="gallery-box">
-                    <!--FOTOPRAFI VE �ZER�NE GELECEK OLAN A�IKLAMA YAZISINI TA�IYAN KUTU-->
-                    <img src="https://picsum.photos/id/1015/600/400"
-                         class="gallery-img"
-                         data-bs-toggle="modal"
-                         data-bs-target="#imageModal"
-                         onclick="openModal(this.src)" />
-                    <div class="img-caption">Dag Manzarasi</div>
+            <div class="row g-4">
+                <!--ROW-- KOLONLARI YATYADA YAN YANA DIZER VE G -4 BIRIM BOSLUK-->
+                <!-- 1. Foto�raf -->
+                <div class="col-md-4">
+                    <!--Orta ve b�y�k ekranlarda 12 lik grid sisteminin 4 birimini kapla-->
+                    <div class="gallery-box">
+                        <!--FOTOPRAFI VE UZERINE GELECEK OLAN ACIKLAMA YAZISINI TASIYAN KUTU-->
+                        <img src="https://picsum.photos/id/1015/600/400"
+                             class="gallery-img"
+                             data-bs-toggle="modal"
+                             data-bs-target="#imageModal"
+                             onclick="openModal(this.src)" />
+                        <div class="img-caption">Dag Manzarasi</div>
+                    </div>
                 </div>
-            </div>
 
-            <!-- 2. Foto�raf -->
-            <div class="col-md-4">
-                <div class="gallery-box">
-                    <img src="https://picsum.photos/id/1016/600/400"
-                         class="gallery-img"
-                         data-bs-toggle="modal"
-                         data-bs-target="#imageModal"
-                         onclick="openModal(this.src)" />
-                    <div class="img-caption">Col Manzarasi</div>
+                <!-- 2. Fotograf -->
+                <div class="col-md-4">
+                    <div class="gallery-box">
+                        <img src="https://picsum.photos/id/1016/600/400"
+                             class="gallery-img"
+                             data-bs-toggle="modal"
+                             data-bs-target="#imageModal"
+                             onclick="openModal(this.src)" />
+                        <div class="img-caption">Col Manzarasi</div>
+                    </div>
                 </div>
-            </div>
 
-            <!-- 3. Foto�raf -->
-            <div class="col-md-4">
-                <div class="gallery-box">
-                    <img src="https://picsum.photos/id/1021/600/400"
-                         class="gallery-img"
-                         data-bs-toggle="modal"
-                         data-bs-target="#imageModal"
-                         onclick="openModal(this.src)" />
-                    <div class="img-caption">Sisli Dag Manzarasi</div>
+                <!-- 3. Fotograf -->
+                <div class="col-md-4">
+                    <div class="gallery-box">
+                        <img src="https://picsum.photos/id/1021/600/400"
+                             class="gallery-img"
+                             data-bs-toggle="modal"
+                             data-bs-target="#imageModal"
+                             onclick="openModal(this.src)" />
+                        <div class="img-caption">Sisli Dag Manzarasi</div>
+                    </div>
                 </div>
-            </div>
 
-            <!-- 4. Foto�raf -->
-            <div class="col-md-4">
-                <div class="gallery-box">
-                    <img src="https://picsum.photos/id/1018/600/400"
-                         class="gallery-img"
-                         data-bs-toggle="modal"
-                         data-bs-target="#imageModal"
-                         onclick="openModal(this.src)" />
-                    <div class="img-caption">Yesillik ve Ucurum</div>
+                <!-- 4. Fotograf -->
+                <div class="col-md-4">
+                    <div class="gallery-box">
+                        <img src="https://picsum.photos/id/1018/600/400"
+                             class="gallery-img"
+                             data-bs-toggle="modal"
+                             data-bs-target="#imageModal"
+                             onclick="openModal(this.src)" />
+                        <div class="img-caption">Yesillik ve Ucurum</div>
+                    </div>
                 </div>
-            </div>
 
-            <!-- 5. Foto�raf -->
-            <div class="col-md-4">
-                <div class="gallery-box">
-                    <img src="https://picsum.photos/id/1019/600/400"
-                         class="gallery-img"
-                         data-bs-toggle="modal"
-                         data-bs-target="#imageModal"
-                         onclick="openModal(this.src)" />
-                    <div class="img-caption">Deniz Manzarasi</div>
+                <!-- 5. Fotograf -->
+                <div class="col-md-4">
+                    <div class="gallery-box">
+                        <img src="https://picsum.photos/id/1019/600/400"
+                             class="gallery-img"
+                             data-bs-toggle="modal"
+                             data-bs-target="#imageModal"
+                             onclick="openModal(this.src)" />
+                        <div class="img-caption">Deniz Manzarasi</div>
+                    </div>
                 </div>
-            </div>
 
-            <!-- 6. Foto�raf -->
-            <div class="col-md-4">
-                <div class="gallery-box">
-                    <img src="https://picsum.photos/id/1020/600/400"
-                         class="gallery-img"
-                         data-bs-toggle="modal"
-                         data-bs-target="#imageModal"
-                         onclick="openModal(this.src)" />
-                    <div class="img-caption">Ayi Fotografi</div>
+                <!-- 6. Fotograf -->
+                <div class="col-md-4">
+                    <div class="gallery-box">
+                        <img src="https://picsum.photos/id/1020/600/400"
+                             class="gallery-img"
+                             data-bs-toggle="modal"
+                             data-bs-target="#imageModal"
+                             onclick="openModal(this.src)" />
+                        <div class="img-caption">Ayi Fotografi</div>
+                    </div>
                 </div>
-            </div>
 
-            <!-- 7. Foto�raf -->
-            <div class="col-md-4">
-                <div class="gallery-box">
-                    <img src="https://picsum.photos/id/1028/600/400"
-                         class="gallery-img"
-                         data-bs-toggle="modal"
-                         data-bs-target="#imageModal"
-                         onclick="openModal(this.src)" />
-                    <div class="img-caption">Oylesine Bir Fotograf</div>
+                <!-- 7. Fotograf -->
+                <div class="col-md-4">
+                    <div class="gallery-box">
+                        <img src="https://picsum.photos/id/1028/600/400"
+                             class="gallery-img"
+                             data-bs-toggle="modal"
+                             data-bs-target="#imageModal"
+                             onclick="openModal(this.src)" />
+                        <div class="img-caption">Sehir Manzarasi</div>
+                    </div>
                 </div>
-            </div>
 
+                <!-- 8. Fotograf -->
+                <div class="col-md-4">
+                    <div class="gallery-box">
+                        <img src="https://picsum.photos/id/1029/600/400"
+                             class="gallery-img"
+                             data-bs-toggle="modal"
+                             data-bs-target="#imageModal"
+                             onclick="openModal(this.src)" />
+                        <div class="img-caption">Sato Manzarasi</div>
+                    </div>
+                </div>
+
+                <!-- 9. Fotograf -->
+                <div class="col-md-4">
+                    <div class="gallery-box">
+                        <img src="https://picsum.photos/id/1040/600/400"
+                             class="gallery-img"
+                             data-bs-toggle="modal"
+                             data-bs-target="#imageModal"
+                             onclick="openModal(this.src)" />
+                        <div class="img-caption">Ay Fotografi</div>
+                    </div>
+                </div>
+
+                <!-- 10. Fotograf -->
+                <div class="col-md-4">
+                    <div class="gallery-box">
+                        <img src="https://picsum.photos/id/1031/600/400"
+                             class="gallery-img"
+                             data-bs-toggle="modal"
+                             data-bs-target="#imageModal"
+                             onclick="openModal(this.src)" />
+                        <div class="img-caption">Plaza Fotografi</div>
+                    </div>
+                </div>
+
+                <!-- 11. Fotograf -->
+                <div class="col-md-4">
+                    <div class="gallery-box">
+                        <img src="https://picsum.photos/id/1032/600/400"
+                             class="gallery-img"
+                             data-bs-toggle="modal"
+                             data-bs-target="#imageModal"
+                             onclick="openModal(this.src)" />
+                        <div class="img-caption">Ay Fotografi</div>
+                    </div>
+                </div>
+
+                <!-- 12. Fotograf -->
+                <div class="col-md-4">
+                    <div class="gallery-box">
+                        <img src="https://picsum.photos/id/1033/600/400"
+                             class="gallery-img"
+                             data-bs-toggle="modal"
+                             data-bs-target="#imageModal"
+                             onclick="openModal(this.src)" />
+                        <div class="img-caption">Plaza Fotografi</div>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
 
 
 
 
+        <!-- ============================================
+             MODAL KISMI (Fotograf BUYUTME + NEXT / PREV BUTONLARI)
+             ============================================ -->
+        <div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content position-relative">
 
-    <!-- ============================================
-         MODAL KISMI (FOTO�RAF B�Y�TME + NEXT / PREV BUTONLARI)
-         ============================================ -->
-    <div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content position-relative">
+                    <!-- Modal i�inde goruntulenen buyuk fotograf -->
+                    <div class="modal-body p-0">
+                        <img id="modalImage" class="w-100" src="" alt="">
+                    </div>
 
-                <!-- Modal i�inde g�r�nt�lenen b�y�k foto�raf -->
-                <div class="modal-body p-0">
-                    <img id="modalImage" class="w-100" src="" alt="">
+                    <!-- onceki fotograf butonu -->
+                    <button class="btn btn-dark position-absolute top-50 start-0 translate-middle-y ms-2"
+                            onclick="prevImage()">
+                        <i class="bi bi-chevron-left fs-2"></i>
+                    </button>
+
+                    <!-- Sonraki fotograf butonu -->
+                    <button class="btn btn-dark position-absolute top-50 end-0 translate-middle-y me-2"
+                            onclick="nextImage()">
+                        <i class="bi bi-chevron-right fs-2"></i>
+                    </button>
+
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                    </div>
+
                 </div>
-
-                <!-- �nceki foto�raf butonu -->
-                <button class="btn btn-dark position-absolute top-50 start-0 translate-middle-y ms-2"
-                        onclick="prevImage()">
-                    <i class="bi bi-chevron-left fs-2"></i>
-                </button>
-
-                <!-- Sonraki foto�raf butonu -->
-                <button class="btn btn-dark position-absolute top-50 end-0 translate-middle-y me-2"
-                        onclick="nextImage()">
-                    <i class="bi bi-chevron-right fs-2"></i>
-                </button>
-
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
-                </div>
-
             </div>
         </div>
-    </div>
 
 
-    <!-- ============================================
-     FOOTER KISMI
-     ============================================ -->
-    <div class="footer-wrapper" style="width:100%; margin-top:60px;">
-        <footer style="
+        <!--=========================================
+         FOOTER KISMI
+         ============================================ -->
+        <div class="footer-wrapper" style="width:100%; margin-top:60px;">
+            <footer style="
         background-color:darkcyan;
         padding:20px 0;
         text-align:center;
@@ -252,92 +353,97 @@
         z-index:10;
         position:relative;
     ">
-            Powered by <span style="color:#0026ff;">rasimataberksahin</span> ©2025
-        </footer>
-    </div>
+                Powered by <span style="color:#0026ff;">rasimataberksahin</span> ©2025
+            </footer>
+        </div>
 
 
 
 
-    <!-- ============================================
-         JAVASCRIPT KODLARI
-         ============================================ -->
-    <!-- Bootstrap JS dosyas� -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- ============================================
+             JAVASCRIPT KODLARI
+             ============================================ -->
+        <!-- Bootstrap JS dosyas� -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 
-    <script>
-        /*
-           openModal()
-           =============
-           Kullan�c� foto�raflardan birine t�klad���nda tetiklenir.
-           Hangi foto�rafa t�kland�ysa o foto�raf�n src bilgisini al�r
-           ve modal i�inde g�r�nt�lenmesini sa�lar.
-        */
-        function openModal(src) {
-            document.getElementById("modalImage").src = src;
-        }
-    </script>
+        <script>
+            /*
+               openModal()
+               =============
+               Kullanici fotograflardan birine t�klad���nda tetiklenir.
+               Hangi fotografa tiklandiysa o fotografin src bilgisini alir
+               ve modal icinde goruntulenmesini saglar.
+            */
+            function openModal(src) {
+                document.getElementById("modalImage").src = src;
+            }
+        </script>
 
 
-    <script>
+        <script>
 
-        /*
-           images dizisi:
-           T�m foto�raflar�n s�ras�n� burada tutuyoruz.
-           B�ylece Next / Prev butonlar� bu dizide gezinerek �al���yor.
-        */
-        const images = [
-            "https://picsum.photos/id/1015/600/400",
-            "https://picsum.photos/id/1016/600/400",
-            "https://picsum.photos/id/1021/600/400",
-            "https://picsum.photos/id/1018/600/400",
-            "https://picsum.photos/id/1019/600/400",
-            "https://picsum.photos/id/1020/600/400",
-            "https://picsum.photos/id/1028/600/400"
-        ];
+            /*
+               images dizisi:
+               Tum fotograflarin sirasini burada tutuyoruz.
+               Boylece Next / Prev butonlari bu dizide gezinebiliyor.
+            */
+            const images = [
+                "https://picsum.photos/id/1015/600/400",
+                "https://picsum.photos/id/1016/600/400",
+                "https://picsum.photos/id/1021/600/400",
+                "https://picsum.photos/id/1018/600/400",
+                "https://picsum.photos/id/1019/600/400",
+                "https://picsum.photos/id/1020/600/400",
+                "https://picsum.photos/id/1028/600/400",
+                "https://picsum.photos/id/1029/600/400",
+                "https://picsum.photos/id/1040/600/400",
+                "https://picsum.photos/id/1031/600/400",
+                "https://picsum.photos/id/1032/600/400",
+                "https://picsum.photos/id/1033/600/400"
+            ];
 
-        /* Hangi foto�raf�n a��k oldu�unu takip eden index */
-        let currentIndex = 0;
-
-
-        /*
-           openModal()
-           -------------
-           T�klanan foto�raf� modal i�ine aktar�r
-           VE dizide o foto�raf ka��nc� s�radaysa bulur.
-           B�ylece ileri/geri i�lemleri do�ru �al���r.
-        */
-        function openModal(src) {
-            currentIndex = images.indexOf(src);
-            document.getElementById("modalImage").src = src;
-        }
+            /* Hangi fotografin acik oldugunu takip eden index */
+            let currentIndex = 0;
 
 
-        /*
-           nextImage()
-           -------------
-           Bir sonraki foto�rafa ge�er.
-           Dizinin sonuna gelince ba�a d�ner (sonsuz d�ng�).
-        */
-        function nextImage() {
-            currentIndex = (currentIndex + 1) % images.length;
-            document.getElementById("modalImage").src = images[currentIndex];
-        }
+            /*
+               openModal()
+               -------------
+               Tiklanan fotografi modal icine aktarir
+               VE dizide o fotograf kacinci siradaysa bulur.
+               Boylece ileri/geri islemleri dogru calisir.
+            */
+            function openModal(src) {
+                currentIndex = images.indexOf(src);
+                document.getElementById("modalImage").src = src;
+            }
 
 
-        /*
-           prevImage()
-           -------------
-           Bir �nceki foto�rafa d�ner.
-           0. foto�raftaysa dizinin sonuna gider (geri d�ng�).
-        */
-        function prevImage() {
-            currentIndex = (currentIndex - 1 + images.length) % images.length;
-            document.getElementById("modalImage").src = images[currentIndex];
-        }
+            /*
+               nextImage()
+               -------------
+               Bir sonraki fotografa gecer.
+               Dizinin sonuna gelince basa doner (sonsuz dongu).
+            */
+            function nextImage() {
+                currentIndex = (currentIndex + 1) % images.length;
+                document.getElementById("modalImage").src = images[currentIndex];
+            }
 
-    </script>
+
+            /*
+               prevImage()
+               -------------
+               Bir onceki fotografa doner.
+               0. fotograftaysa dizinin sonuna gider (geri dongu).
+            */
+            function prevImage() {
+                currentIndex = (currentIndex - 1 + images.length) % images.length;
+                document.getElementById("modalImage").src = images[currentIndex];
+            }
+
+        </script>
 
 </body>
 </html>
